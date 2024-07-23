@@ -3,6 +3,7 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+	"Hoffs/omnisharp-extended-lsp.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -26,12 +27,15 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
+		"biome",
 		"clangd",
-		-- "csharp_ls",
+		"dockerls",
+		"docker_compose_language_service",
 		"omnisharp",
                 "lua_ls",
                 "rust_analyzer",
-                -- "gopls",
+		"tsserver",
+		"yamlls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -87,6 +91,12 @@ return {
 					EnableImportCompletion = true,
 					AnalyzeOpenDocumentsOnly = true,
 				},
+			},
+			handlers = {
+				["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+				["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+				["textDocument/reference"] = require('omnisharp_extended').references_handler,
+				["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
 			},
 		    }
 		end,

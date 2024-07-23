@@ -30,6 +30,14 @@ RUN apt update && apt install -y \
   htop
 
 ADD .config $HOME/.config
-RUN chown -R $USERID:$GROUPID $HOME
+RUN echo "alias vim=nvim" >$HOME/.bashrc
+RUN echo 'export PS1="${debian_chroot:+($debian_chroot)}dev:\w\$ "' >>$HOME/.bashrc
 
 ENV LOGNAME=$LOGNAME
+ENV HOME=$HOME
+
+# install nodejs / nvm / npm
+RUN bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash"
+RUN bash -c "source $HOME/.nvm/nvm.sh && nvm install 20"
+
+RUN chown -R $USERID:$GROUPID $HOME
