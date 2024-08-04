@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+ARG DOTNET_SDK_VERSION=8.0
+FROM mcr.microsoft.com/dotnet/sdk:$DOTNET_SDK_VERSION
 
 ARG USERID=1000
 ARG GROUPID=1000
