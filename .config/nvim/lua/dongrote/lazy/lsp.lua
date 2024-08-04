@@ -3,7 +3,6 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-	"Hoffs/omnisharp-extended-lsp.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -12,6 +11,8 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "razzmatazz/csharp-language-server",
+        "Decodetalkers/csharpls-extended-lsp.nvim",
     },
 
     config = function()
@@ -27,15 +28,10 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-		"biome",
-		"clangd",
-		"dockerls",
-		"docker_compose_language_service",
-		"omnisharp",
                 "lua_ls",
-                "rust_analyzer",
-		"tsserver",
-		"yamlls",
+                "dockerls",
+                "tsserver",
+                "csharp_ls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -44,22 +40,6 @@ return {
                     }
                 end,
 
-                zls = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.zls.setup({
-                        root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                        settings = {
-                            zls = {
-                                enable_inlay_hints = true,
-                                enable_snippets = true,
-                                warn_style = true,
-                            },
-                        },
-                    })
-                    vim.g.zig_fmt_parse_errors = 0
-                    vim.g.zig_fmt_autosave = 0
-
-                end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -74,32 +54,6 @@ return {
                         }
                     }
                 end,
-		["omnisharp"] = function()
-		    local lspconfig = require("lspconfig")
-		    lspconfig.omnisharp.setup {
-		        cmd = { "/opt/omnisharp/run" },
-			settings = {
-				FormattingOptions = {
-					EnableEditorConfigSupport = true,
-					OrganizeImports = true,
-				},
-				MsBuild = {
-					LoadProjectsOnDemand = nil,
-				},
-				RoslynExtensionOptions = {
-					EnableAnalyzersSupport = true,
-					EnableImportCompletion = true,
-					AnalyzeOpenDocumentsOnly = true,
-				},
-			},
-			handlers = {
-				["textDocument/definition"] = require('omnisharp_extended').definition_handler,
-				["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
-				["textDocument/reference"] = require('omnisharp_extended').references_handler,
-				["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
-			},
-		    }
-		end,
             }
         })
 
@@ -112,8 +66,8 @@ return {
                 end,
             },
             mapping = cmp.mapping.preset.insert({
-                ['<Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<S-Tab>'] = cmp.mapping.select_next_item(cmp_select),
+                ['<C-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
+                ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
