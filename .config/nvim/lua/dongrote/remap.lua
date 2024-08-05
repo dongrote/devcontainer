@@ -14,6 +14,7 @@ vim.keymap.set("n", "<leader>csr", "<cmd>!dotnet restore<CR>")
 vim.keymap.set("n", "<leader>npmb", "<cmd>!npm run build<CR>")
 vim.keymap.set("n", "<leader>npmt", "<cmd>!npm test<CR>")
 
-vim.keymap.set("n", "<leader>lsp", "<cmd>LspRestart<CR>")
+vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>")
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format", })
 
 -- vim.keymap.set("n", "<leader>gd", "<cmd>lua require('omnisharp_extended').telescope_lsp_definition({ jump_type = 'vsplit' })<CR>")
