@@ -6,9 +6,13 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, { desc = "File Tree To
 -- set executable bit on current file
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- clear highlight
+vim.keymap.set("n", "<leader>ch", "<cmd>noh<CR>", { desc = "Clear Highlight", })
+
 -- csharp (dotnet) shell commands
-vim.keymap.set("n", "<leader>cst", "<cmd>!dotnet test<CR>")
-vim.keymap.set("n", "<leader>csr", "<cmd>!dotnet restore<CR>")
+vim.keymap.set("n", "<leader>cst", "<cmd>!dotnet test<CR>", { desc = "Run C# Tests", })
+vim.keymap.set("n", "<leader>csb", "<cmd>!dotnet build<CR>", { desc = "C# Build", })
+vim.keymap.set("n", "<leader>csr", "<cmd>!dotnet restore<CR>", { desc = "C# Restore", })
 
 -- nodejs shell commands
 vim.keymap.set("n", "<leader>npmb", "<cmd>!npm run build<CR>")
