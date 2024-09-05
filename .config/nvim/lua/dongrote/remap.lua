@@ -1,6 +1,10 @@
 vim.g.mapleader = " "
 
 -- open file explorer
+vim.keymap.set("n", "<leader>us", "<cmd>:setlocal spell<CR>", { desc = "Spellcheck On", })
+vim.keymap.set("n", "<leader>uS", "<cmd>:setlocal nospell<CR>", { desc = "Spellcheck Off", })
+
+-- open file explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, { desc = "File Tree Toggle", })
 
 -- set executable bit on current file
