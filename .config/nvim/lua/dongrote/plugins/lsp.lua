@@ -30,7 +30,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "dockerls",
-                "tsserver",
+                "ts_ls",
                 "csharp_ls",
                 "rust_analyzer",
             },

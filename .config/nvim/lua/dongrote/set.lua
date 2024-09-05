@@ -1,7 +1,7 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
-vim.opt.colorcolumn = '120'
+vim.opt.colorcolumn = '80'
 
 -- Trying to change line numbers to be more visible
 -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white', })
