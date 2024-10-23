@@ -26,3 +26,5 @@ vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>")
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format", })
 
 -- vim.keymap.set("n", "<leader>gd", "<cmd>lua require('omnisharp_extended').telescope_lsp_definition({ jump_type = 'vsplit' })<CR>")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
