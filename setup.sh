@@ -110,6 +110,6 @@ case "$1" in
     install_dotnet8
     ;;
   *)
-    echo "options: $0 zsh | nvm | docker | nvim | [-]nvchad"
+    echo "options: $0 zsh | nvm | docker | dotnet | nvim | [-]nvchad"
     ;;
 esac	
