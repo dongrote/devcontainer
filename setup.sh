@@ -87,6 +87,27 @@ install_dotnet8() {
   sudo apt-get install -y dotnet-sdk-8.0 aspnetcore-runtime-8.0
 }
 
+install_tmux() {
+    sudo apt install -y tmux
+
+    # install catppuccin
+    mkdir -p ~/.config/tmux/plugins/catppuccin
+    git clone -b v2.1.0 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+    echo "run ~/.config/tmux/plugins/catpuccin/tmux/catppuccin.tmux" >>~/.tmux.conf
+
+    # install TPM (tmux plugin manager)
+    mkdir -p ~/.tmux/plugins
+    git clone https://github.com/tmux-plugins/tmp ~/.tmux/plugins/tpm
+    cat <<EOF >>~/.tmux.conf
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Initialize TMUX plugin manager *keep this line at the very bottom)
+run '~/.tmux/plugins/tpm/tpm'
+EOF
+}
+
 case "$1" in
   zsh)
     install_zsh
@@ -109,7 +130,10 @@ case "$1" in
   dotnet)
     install_dotnet8
     ;;
+  tmux)
+    install_tmux
+    ;;
   *)
-    echo "options: $0 zsh | nvm | docker | dotnet | nvim | [-]nvchad"
+    echo "options: $0 zsh | nvm | docker | dotnet | tmux | nvim | [-]nvchad"
     ;;
 esac	
