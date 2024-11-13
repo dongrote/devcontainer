@@ -97,21 +97,26 @@ install_tmux() {
     # install TPM (tmux plugin manager)
     mkdir -p ~/.tmux/plugins
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    cat <<EOF >>~/.tmux.conf
+    cat <<EOF >~/.tmux.conf
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 
 set -g @catppuccin_flavor "mocha"
-set -g @catppuccin_window_status_style "rounded"
+set -g @catppuccin_window_status_style "basic"
+set -g @catppuccin_window_text "#W"
 
 run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+
+# set vi key schema
+setw -g status-keys vi
 
 set -g status-left-length 100
 set -g status-right-length 100
 set -g status-right "#{E:@catppuccin_status_application}"
 set -agF status-right "#{E:@catppuccin_status_cpu}"
+set -agF status-right "%H:%M"
 
 # Initialize TMUX plugin manager *keep this line at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'

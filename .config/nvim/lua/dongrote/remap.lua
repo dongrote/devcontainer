@@ -19,6 +19,10 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, { desc = "File Tree To
 -- set executable bit on current file
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- run custom test.sh script
+vim.keymap.set("n", "<leader>t", "<cmd>!test.sh %<CR>", { desc = "Run Tests", })
+vim.keymap.set("n", "<leader>b", "<cmd>!build.sh %<CR>", { desc = "Run Build", })
+
 -- clear highlight
 vim.keymap.set("n", "<ESC>", "<cmd>noh<CR>", { desc = "Clear Highlight", })
 
