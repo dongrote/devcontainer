@@ -19,4 +19,5 @@ vim.opt.termguicolors = true
 
 -- automatically create folds based on indentation
 vim.opt.foldmethod = 'indent'
-vim.opt.foldcolumn = 4
+vim.opt.foldcolumn = '4'
+vim.opt.foldlevelstart = 2
