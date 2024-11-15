@@ -16,3 +16,7 @@ vim.opt.smartindent = true
 
 vim.opt.scrolloff = 8
 vim.opt.termguicolors = true
+
+-- automatically create folds based on indentation
+vim.opt.foldmethod = 'indent'
+vim.opt.foldcolumn = 4
