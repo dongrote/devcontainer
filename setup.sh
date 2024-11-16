@@ -106,6 +106,8 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @catppuccin_flavor "mocha"
 set -g @catppuccin_window_status_style "basic"
 set -g @catppuccin_window_text "#W"
+set -g @catppuccin_window_default_text "#W"
+set -g @catppuccin_window_current_text "#W"
 
 run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
 
