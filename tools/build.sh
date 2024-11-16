@@ -26,6 +26,28 @@ function dotnet_build() {
     dotnet build $(find_csproj "$1")
 }
 
+function find_packagejson() {
+    directory="$1"
+    while [[ "$directory" != "/" ]]
+    do
+        packagejson=$(find "$directory" -maxdepth 1 -name 'package.json' 2>/dev/null | head -1)
+        if [[ "$packagejson" != "" ]]
+        then
+            echo "$packagejson"
+            return 0
+        fi
+
+        directory=$(dirname "$directory")
+    done
+
+    echo "Can't find a package.json file; aborting"
+    exit 1
+}
+
+function typescript_build() {
+    cd $(dirname $(find_packagejson "$1"))
+    npm run build
+}
 
 if [[ "$1" == "" ]]
 then
@@ -47,8 +69,7 @@ case "$extension" in
         dotnet_build $(dirname "$origin_file")
         ;;
     ".ts")
-        echo "typescript support not ready yet"
-        exit 1
+        typescript_build $(dirname "$origin_file")
         ;;
     *)
         echo "Unrecognized extension '${extension}'"
