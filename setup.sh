@@ -98,6 +98,11 @@ install_tmux() {
     mkdir -p ~/.tmux/plugins
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     cat <<EOF >~/.tmux.conf
+# rebind prefix
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
