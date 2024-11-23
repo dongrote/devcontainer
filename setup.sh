@@ -123,7 +123,8 @@ set -g status-left-length 100
 set -g status-right-length 100
 set -g status-right "#{E:@catppuccin_status_application}"
 set -agF status-right "#{E:@catppuccin_status_cpu}"
-set -agF status-right "%H:%M"
+set -agF status-right "#{E:@catppuccin_status_date_time}"
+set -agF status-right "#{E:@catppuccin_status_host}"
 
 # Initialize TMUX plugin manager *keep this line at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'
