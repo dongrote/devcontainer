@@ -21,3 +21,6 @@ vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
 vim.opt.foldcolumn = '4'
 vim.opt.foldlevelstart = 2
+
+-- disable virtual text because lsp_lines makes them redundant
+vim.diagnostic.config({ virtual_text = false })

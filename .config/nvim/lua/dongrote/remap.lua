@@ -9,6 +9,9 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
+-- show full path
+vim.keymap.set("n", "<leader>P", "1<C-g>", { desc = "show full file path" })
+
 -- open file explorer
 vim.keymap.set("n", "<leader>us", "<cmd>:setlocal spell<CR>", { desc = "Spellcheck On", })
 vim.keymap.set("n", "<leader>uS", "<cmd>:setlocal nospell<CR>", { desc = "Spellcheck Off", })
