@@ -4,6 +4,10 @@ install_build_essential() {
 	sudo apt install -y build-essential
 }
 
+install_curl() {
+	sudo apt install -y curl
+}
+
 install_zsh() {
 	# install zsh
 	sudo apt install -y zsh
@@ -52,9 +56,17 @@ install_ripgrep() {
 
 install_nvim() {
   install_build_essential
-  curl -LO https://github.com/neovim/neovim-releases/releases/download/stable/nvim-linux64.deb
-  sudo dpkg -i nvim-linux64.deb
-  rm nvim-linux64.deb
+  install_curl
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+  sudo rm -rf /opt/nvim
+  sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+  rm nvim-linux-x86_64.tar.gz
+  if [ -e ~/.bashrc ]; then
+    echo 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"'>>~/.bashrc
+  fi
+  if [ -e ~/.zshrc ]; then
+    echo 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"'>>~/.zshrc
+  fi
 }
 
 install_unzip() {
@@ -103,6 +115,13 @@ unbind C-b
 set -g prefix C-Space
 bind C-Space send-prefix
 
+# Bind Ctrl-h, Ctrl-j, Ctrl-k, and Ctrl-l to switch panes
+# instead of arrow keys
+bind C-h select-pane -L
+bind C-j select-pane -D
+bind C-k select-pane -U
+bind C-l select-pane -R
+
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
@@ -139,7 +158,7 @@ case "$1" in
     install_nvm
     ;;
   docker)
-    install_docker
+    install_docker_debian
     ;;
   nvim)
     install_nvim
