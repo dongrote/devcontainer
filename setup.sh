@@ -8,6 +8,10 @@ install_build_essential() {
 	sudo apt install -y build-essential
 }
 
+install_curl() {
+	sudo apt install -y curl
+}
+
 install_zsh() {
 	# install zsh
 	sudo apt install -y zsh
@@ -122,6 +126,13 @@ install_tmux() {
 unbind C-b
 set -g prefix C-Space
 bind C-Space send-prefix
+
+# Bind Ctrl-h, Ctrl-j, Ctrl-k, and Ctrl-l to switch panes
+# instead of arrow keys
+bind C-h select-pane -L
+bind C-j select-pane -D
+bind C-k select-pane -U
+bind C-l select-pane -R
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
