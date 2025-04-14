@@ -1,5 +1,9 @@
 #!/bin/bash
 
+install_curl() {
+	sudo apt install -y curl
+}
+
 install_build_essential() {
 	sudo apt install -y build-essential
 }
@@ -50,11 +54,27 @@ install_ripgrep() {
   rm ripgrep_14.1.0-1_amd64.deb
 }
 
+update_path() {
+  if [[ "$SHELL" == "/bin/bash" ]]; then
+    echo 'export PATH="$PATH:'$1'"' >> ~/.bashrc
+  fi
+
+  if [[ "$SHELL" == "/bin/zsh" ]]; then
+    echo 'export PATH="$PATH:'$1'"' >> ~/.zshrc
+  fi
+}
+
 install_nvim() {
   install_build_essential
-  curl -LO https://github.com/neovim/neovim-releases/releases/download/stable/nvim-linux64.deb
-  sudo dpkg -i nvim-linux64.deb
-  rm nvim-linux64.deb
+  install_curl
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+  sudo rm -rf /opt/nvim*
+  sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+  rm nvim-linux-x86_64.tar.gz
+  update_path /opt/nvim-linux-x86_64/bin
+  MYDIR=$(dirname $(realpath "$0"))
+  mkdir -p ~/.config
+  ln -s "$MYDIR/.config/nvim" ~/.config/nvim
 }
 
 install_unzip() {
@@ -139,7 +159,7 @@ case "$1" in
     install_nvm
     ;;
   docker)
-    install_docker
+    install_docker_debian
     ;;
   nvim)
     install_nvim
